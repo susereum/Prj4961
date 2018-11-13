@@ -1,0 +1,65 @@
+<xml>
+    <vbox-setup>
+        <path-to-vboxmanage>
+            C:\Program Files\Oracle\VirtualBox\VBoxManage.exe
+        </path-to-vboxmanage>path-to-vboxmanage>
+    </vbox-setup>
+    <testbed-setup>
+		<network-config>
+			<ip-address>
+			localhost
+			</ip-address>
+		</network-config>
+        <vm-set>
+            <base-groupname>
+                <!-- Optional: All vms that are cloned will be placed in this group and then in a subgroup based on the adapter name -->
+                Route_Hijacking_Exercise
+            </base-groupname>
+            <num-clones>
+                <!-- Required: Each virtual machine specified in this file will be clones this many times -->
+                8
+            </num-clones>
+            <clone-snapshots>
+                true
+            </clone-snapshots>
+            <linked-clones>
+                <!-- Required: May only be true if the clone-snapshots is true; otherwise, this will default to false; if true linked clones; otherwise, full clones -->
+                true
+            </linked-clones>
+            <base-outname>
+                <!-- Required: Will be appended to the cloned virtual machine name, e.g., if the vm is called my_vm, the result will be my_vm101x, where x is incremented for each cloned vm -->
+                101
+            </base-outname>
+            <vrdp-baseport>
+                <!-- Required: The first number used when assigning a remote display port; this number will be incremented for each vm that specifies vrdp-enabled as true -->
+                1011
+            </vrdp-baseport>
+            <vm>
+                <name>
+                    <!-- Required: The name of the vm that will be cloned -->
+                    kali-2016.2-debian_ecel
+                </name>
+                <vrdp-enabled>
+                    <!-- Required: Indicates whether clones of this vm should have vrdp enabled; if true, then vrdp-baseport will be used to determine the port to use -->
+                    true
+                </vrdp-enabled>
+                <internalnet-basename>
+                    <!-- Required: The base name of the internal network adapter -->
+                    intnet
+                </internalnet-basename>
+            </vm>
+            <vm>
+                <name>
+                    ubuntu-core4.7
+                </name>
+                <vrdp-enabled>
+                    false
+                </vrdp-enabled>
+                <internalnet-basename>
+                    <!-- Required: The base name of the internal network adapter -->
+                    intnet
+                </internalnet-basename>
+            </vm>
+        </vm-set>
+    </testbed-setup>
+</xml>
